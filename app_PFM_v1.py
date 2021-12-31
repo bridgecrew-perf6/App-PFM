@@ -1,4 +1,4 @@
-#import spacy_streamlit
+import spacy_streamlit
 import spacy
 from spacy import displacy
 import streamlit as st
@@ -38,30 +38,27 @@ V.A.T.
  
 #------------Tratar el texto obtenido ----------------(Parte suministrada por el modelo)
 nlp = en_core_web_sm.load()
-# # #Tokenizar el texto  
-# documento_spacy = nlp(documento)
-# # #Creear una lista con las plabras que me interesan usando Comprehension lists
-# documento_procesado = [token for token in documento_spacy if not token.is_stop and not token.is_punct]
+# #Tokenizar el texto  
+documento_spacy = nlp(documento)
+# #Creear una lista con las plabras que me interesan usando Comprehension lists
+documento_procesado = [token for token in documento_spacy if not token.is_stop and not token.is_punct]
+#Mostrar la categorización de campos por colores 
+st.title("Modelo de extracción de información de facturas")
+st.write("""
+Extracción de la información utilizando la librería Spacy 
+""")
+spacy_streamlit.visualize(models, default_text= documento_spacy, visualizers=["ner"])
+#---------------------------------------------------------------
 
+#------------Construir una tabla con la clasificación de la inf de la factura----------------------------------
 # Introducir el doc tokenizado en pandas
-documento.split('\n')
-sentences_text = []
-# for i, sentence in documento:  
-#     sentences_text.append(sentence['Data Invoice'])
-
-
-# data = pd.DataFrame({
-#     'Data Invoice': sentences_text})
-
+st.write("""
+Resumen de la información categorizada y disponible para descargar 
+""")
 table_data = pd.DataFrame(list(documento), columns=["Data Invoice"])
 #Añadir una columna que contendrá la clasificación de la palabra (dirección, teléfono, etc)
 table_data['Word Classification'] = "word"
 
-#spacy_streamlit.visualize(models, default_text= documento_spacy, visualizers=["ner"])
-###GitHub da error error al cargar este paquete spacy_streamlit
-#---------------------------------------------------------------
-
-#------------Crear la app------------------------------------------
 #Mostrar la tabla que hemos creado con los datos de la factura y su categorización
 st.dataframe(table_data,1000)
 
