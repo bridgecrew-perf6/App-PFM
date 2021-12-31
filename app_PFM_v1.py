@@ -65,15 +65,18 @@ st.dataframe(table_data,1000)
 #Añadir botón para descargar csv //PROBLEMA: no separa los datos por columnas
 @st.cache
 def convert_csv(df):
-    # csv = df.to_csv().encode('utf-8')
-    csv = df.to_csv(index=False)
-    return csv
+    csv = df.to_csv().encode('utf-8')
+    return df.to_csv(
+      sep=";",
+      index = False,
+      float_format='%g'
+      ).encode('utf-8')
+
+csv = convert_csv(table_data)
 
 st.download_button(
   label="Download data as CSV",
-  data=convert_csv(table_data),
+  data=csv,
   file_name='data_app.csv',
   mime='text/csv',
 )
-
-#-------------------------------------------------------------------
