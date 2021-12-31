@@ -1,10 +1,12 @@
-import spacy_streamlit
+#import spacy_streamlit
 import spacy
 from spacy import displacy
 import streamlit as st
 import en_core_web_sm
-# import csv
 import pandas as pd
+import numpy as np
+import string 
+import random
 
 models = ["en_core_web_sm"]#, "en_core_web_md"] #idioma 
 
@@ -34,20 +36,47 @@ V.A.T.
 225,00"""
 #----------------------------------------------------
  
-#------------Tratar el texto obtenido ----------------
+#------------Tratar el texto obtenido ----------------(Parte suministrada por el modelo)
 nlp = en_core_web_sm.load()
+# # #Tokenizar el texto  
+# documento_spacy = nlp(documento)
+# # #Creear una lista con las plabras que me interesan usando Comprehension lists
+# documento_procesado = [token for token in documento_spacy if not token.is_stop and not token.is_punct]
 
-#Tokenizar el texto  
-documento_spacy = nlp(documento)
-#Cre una lista con las plabras que me interesan usando Comprehension lists
-documento_procesado = [token for token in documento_spacy if not token.is_stop and not token.is_punct]
+# Introducir el doc tokenizado en pandas
+documento.split('\n')
+sentences_text = []
+# for i, sentence in documento:  
+#     sentences_text.append(sentence['Data Invoice'])
 
-spacy_streamlit.visualize(models, default_text= documento_spacy, visualizers=["ner"])
+
+# data = pd.DataFrame({
+#     'Data Invoice': sentences_text})
+
+table_data = pd.DataFrame(list(documento), columns=["Data Invoice"])
+#Añadir una columna que contendrá la clasificación de la palabra (dirección, teléfono, etc)
+table_data['Word Classification'] = "word"
+
+#spacy_streamlit.visualize(models, default_text= documento_spacy, visualizers=["ner"])
+###GitHub da error error al cargar este paquete spacy_streamlit
 #---------------------------------------------------------------
 
-#-----------Añadir botón para descargar csv --------------------
-# Introducir el doc tokenizado en pandas
-data = pd.DataFrame(documento_procesado,columns=["Title: Data Invoice"])
+#------------Crear la app------------------------------------------
+#Mostrar la tabla que hemos creado con los datos de la factura y su categorización
+st.dataframe(table_data,1000)
 
-st.download_button(label='Download CSV', data=documento, file_name="app.csv", mime='text/csv')
+#Añadir botón para descargar csv //PROBLEMA: no separa los datos por columnas
+@st.cache
+def convert_csv(df):
+    # csv = df.to_csv().encode('utf-8')
+    csv = df.to_csv(index=False)
+    return csv
+
+st.download_button(
+  label="Download data as CSV",
+  data=convert_csv(table_data),
+  file_name='data_app.csv',
+  mime='text/csv',
+)
+
 #-------------------------------------------------------------------
