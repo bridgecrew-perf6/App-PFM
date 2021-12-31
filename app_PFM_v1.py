@@ -42,7 +42,7 @@ documento_spacy = nlp(documento)
 #Cre una lista con las plabras que me interesan usando Comprehension lists
 documento_procesado = [token for token in documento_spacy if not token.is_stop and not token.is_punct]
 
-spacy_streamlit.visualize(models, documento_spacy)
+spacy_streamlit.visualize(models, default_text= documento_spacy, visualizers=["ner"])
 #---------------------------------------------------------------
 
 #-----------Añadir botón para descargar csv --------------------
