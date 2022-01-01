@@ -450,3 +450,5 @@ zope=1.0=py38_1
 zope.event=4.5.0=py38_0
 zope.interface=5.4.0=py38h2bbff1b_0
 zstd=1.4.9=h19a0ad4_0
+spacy>=2.2.0,<3.0.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz#egg=en_core_web_sm
