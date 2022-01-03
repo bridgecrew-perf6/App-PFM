@@ -7,6 +7,11 @@ import pandas as pd
 import numpy as np
 import string 
 import random
+import pytesseract
+####------------------MODELO---------------------------------------------
+
+####---------------------------------------------------------------------
+
 
 models = ["en_core_web_sm"]#, "en_core_web_md"] #idioma 
 
