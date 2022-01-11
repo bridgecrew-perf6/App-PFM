@@ -7,13 +7,19 @@ import pandas as pd
 import numpy as np
 import string 
 import random
+import tesseract-ocr
 import pytesseract
+
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 ####------------------MODELO---------------------------------------------
 
 ####---------------------------------------------------------------------
 
 
-models = ["en_core_web_sm"]#, "en_core_web_md"] #idioma 
+models = ["es_core_news_la"]#en_core_web_sm"]#, es_core_news_la, "en_core_web_md"] #idioma 
 
 #------------Texto devuelto por el OCR------------------------------(Esto lo debería devolver el modelo correctamente transformado e identificado)
 #Guardo en una variable el texto de la factura , asumiendo que esto lo que extrajo el OCR. 
