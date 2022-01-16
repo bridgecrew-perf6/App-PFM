@@ -6,14 +6,14 @@ import en_core_web_sm
 import pandas as pd
 import numpy as np
 import string 
-import random
-import tesseract-ocr
-import pytesseract
+#import random
+#import tesseract-ocr
+#import pytesseract
 
-try:
-    from PIL import Image
-except ImportError:
-    import Image
+#try:
+ #   from PIL import Image
+#except ImportError:
+#    import Image
 ####------------------MODELO---------------------------------------------
 
 ####---------------------------------------------------------------------
