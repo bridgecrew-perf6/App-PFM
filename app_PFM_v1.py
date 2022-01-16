@@ -19,7 +19,7 @@ import string
 ####---------------------------------------------------------------------
 
 
-models = ["es_core_news_lg"]#en_core_web_sm"]#, es_core_news_la, "en_core_web_md"] #idioma 
+models = ["en_core_web_sm"]#, es_core_news_la, "en_core_web_md"] #idioma 
 
 #------------Texto devuelto por el OCR------------------------------(Esto lo debería devolver el modelo correctamente transformado e identificado)
 #Guardo en una variable el texto de la factura , asumiendo que esto lo que extrajo el OCR. 
